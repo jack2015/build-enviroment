@@ -1,0 +1,14 @@
+--- a/sbin/update-ca-certificates
++++ b/sbin/update-ca-certificates
+@@ -218,9 +218,9 @@ then
+   done
+   if [ "$verbose" = 0 ]
+   then
+-    openssl rehash . > /dev/null
++    c_rehash . > /dev/null
+   else
+-    openssl rehash -v .
++    c_rehash -v .
+   fi
+ fi
+ 

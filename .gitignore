@@ -1,0 +1,6 @@
+/builds*
+/.deps/
+/sources/
+*.swp
+site.conf
+bblayers.conf

@@ -1,0 +1,117 @@
+diff --git a/Makefile.am b/Makefile.am
+index 09343ff1..b3a2916a 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,110 +1,59 @@
+ ACLOCAL_AMFLAGS = -I m4
+ 
+ SUBDIRS = \
+-	advhdmi \
+-	aihdcontroler \
+ 	antiscrollbar \
+-	aspectratioswitch \
+-	audiorestart \
+ 	audiosync \
+-	automaticcleanup \
+ 	automaticvolumeadjustment \
+ 	autoresolution \
+ 	autotimer \
+-	babelzapper \
+-	birthdayreminder \
+ 	bonjour \
+ 	cdinfo \
+-	channelselectionshorttitle \
+-	curlytx \
+ 	dreamexplorer \
+-	dreamirc \
+ 	dreammediathek \
+ 	dvdbackup \
+-	easyinfo \
+-	easymedia \
+-	ecasa \
+-	eibox \
+ 	emailclient \
+ 	emission \
+-	eparted \
+ 	epgrefresh \
+-	eurotictv \
+-	eventlist \
+-	eventposition \
+ 	filebrowser \
+ 	flashexpander \
+ 	fritzcall \
+-	fstabeditor \
+ 	ftpbrowser \
+ 	googlemaps \
+-	growlee \
+ 	imdb \
+ 	infobartunerstate \
+ 	kiddytimer \
+-	letterbox \
+ 	mediadownloader \
+-	merlinepg \
+-	merlinepgcenter \
+ 	merlinmusicplayer \
+-	mosaic \
+ 	moviecut \
+-	movieretitle \
+ 	moviesearch \
+-	movietagger \
+ 	mphelp \
+-	multirc \
+-	ncidclient \
+ 	netcaster \
+ 	ofdb \
+ 	orfat \
+ 	orfteletext \
+-	partnerbox \
+ 	permanentclock \
+ 	pipservicerelation \
+ 	podcast \
+-	porncenter \
+ 	pushservice \
+ 	quickbutton \
+ 	reconstructapsc \
+-	reftopiconname \
+ 	remotetimer \
+-	rsdownloader \
+ 	seriesplugin \
+-	setpasswd \
+ 	shoutcast \
+ 	showclock \
+-	simplerss \
+ 	subsdownloader2 \
+-	svdrp \
+ 	tageditor \
+-	teletext \
+ 	toolkit \
+-	tvcharts \
+-	unwetterinfo \
+-	valixdcontrol \
+-	videocolorspace \
+-	vlcplayer \
+ 	vps \
+ 	weatherplugin \
+ 	weathercomponent \
+ 	weathercomponenthandler \
+-	webadmin \
+-	webbouqueteditor \
+ 	webcamviewer \
+-	werbezapper \
+-	zaphistorybrowser \
+ 	zapstatistic \
+-	zdfmediathek \
+-	esame \
+-	schiffe \
+-	sudoku \
+-	vierg \
+-	bmediacenter \
+-	advancedmovieselection
++	zdfmediathek
+ 
+ if DREAMBOX
+-SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
++SUBDIRS +=  fancontrol2 logomanager genuinedreambox
+ endif
+ 
+ if VUSOLO2

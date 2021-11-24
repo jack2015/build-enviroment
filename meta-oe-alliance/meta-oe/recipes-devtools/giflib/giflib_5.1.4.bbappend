@@ -1,0 +1,1 @@
+SSTATE_DUPWHITELIST += "${STAGING_INCDIR}/gif_lib.h"

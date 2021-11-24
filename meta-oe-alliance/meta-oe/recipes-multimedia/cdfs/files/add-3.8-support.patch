@@ -1,0 +1,50 @@
+diff --git a/daemon.c b/daemon.c
+index d5747aa..694d61c 100644
+--- a/daemon.c
++++ b/daemon.c
+@@ -157,7 +157,7 @@ int kcdfsd_thread(void *unused){
+ #ifdef OLD_KERNEL
+   exit_files(current);  /* daemonize doesn't do exit_files */
+   daemonize();
+-#else
++#elif LINUX_VERSION_CODE < KERNEL_VERSION(3, 8, 0)
+   daemonize("k"FSNAME"d");
+ 
+   /* Allow SIGTERM to quit properly when removing module */
+diff --git a/root.c b/root.c
+index 6a923e2..c800851 100644
+--- a/root.c
++++ b/root.c
+@@ -26,6 +26,9 @@
+ 
+ #include <linux/module.h>
+ #include <linux/sched.h>
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0)
++#include <linux/kthread.h>
++#endif
+ 
+ 
+ /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*
+@@ -661,14 +664,22 @@ static int __init cdfs_init(void) {
+   cdfs_proc_cd=NULL;
+ 
+   // start kernel thread
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 8, 0)
+   if ((kcdfsd_pid = kernel_thread(kcdfsd_thread, NULL, CLONE_FS | CLONE_FILES | CLONE_SIGHAND)) >0 ) {
+     return 0;
+   } else {
+     printk(FSNAME" kernel_thread failed.\n");
++#else
++  kcdfsd_pid = kthread_run(kcdfsd_thread, NULL, "kcdfsd_thread");
++  if (IS_ERR(kcdfsd_pid)) {
++    printk(FSNAME" kthread_run failed.\n");
++#endif
+     if (cdfs_proc_entry) remove_proc_entry(FSNAME, NULL);
+     unregister_filesystem(&cdfs_fs_type);
+     return -1;
+   }
++
++  return 0;
+ }
+ 
+ /******************************************************************/
