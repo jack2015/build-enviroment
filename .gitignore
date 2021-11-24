@@ -1,6 +1,8 @@
 /builds*
 /.deps/
 /sources/
+/meta-dream/recipes-local/images/
+/meta-dream/recipes-local/drivers/
 *.swp
 site.conf
 bblayers.conf
