@@ -1,58 +1,57 @@
-SUMMARY = "Multi boot loader for enigma2"
-MAINTAINER = "oe-alliance"
-
-LICENSE = "GPLv2"
+DESCRIPTION = "Multi boot loader manager for enigma2 box"
+HOMEPAGE = "https://github.com/Dima73/pli-openmultibootmanager"
+LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit gitpkgv pythonnative gettext
+RDEPENDS_${PN} = "python-subprocess mtd-utils mtd-utils-ubifs openmultiboot"
+RRECOMMENDS_${PN} = "kernel-module-nandsim kernel-module-block2mtd"
+inherit gitpkgv distutils-openplugins
 
 SRCREV = "${AUTOREV}"
-PV = "1.3+git${SRCPV}"
-PKGV = "1.3+git${GITPKGV}"
-PR = "r0"
+PV = "1.0+git${SRCPV}"
+PKGV = "1.0+git${GITPKGV}"
+
+INHIBIT_PACKAGE_STRIP = "1"
+INSANE_SKIP_${PN}_append = " already-stripped"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://github.com/oe-alliance/openmultibootmanager.git;protocol=https;branch=dev-bootmenu-helper"
+SRC_URI = "git://github.com/jack2015/pli-openmultibootmanager.git;protocol=${GIT_PROTOCOL};branch=master"
+
+SRC_URI += " \
+	file://nfidump_mipsel_0.4.2 \
+	file://nfidump_mipsel_1.0.0 \
+	file://nfidump_mipsel_2.0.0 \
+	"
+
+FILES_${PN}_append = " /usr/sbin /sbin"
+NFINAME_dm7020hd = "nfidump_mipsel_1.0.0"
+NFINAME_dm7020hdv2 = "nfidump_mipsel_1.0.0"
+NFINAME_dm8000 = "nfidump_mipsel_1.0.0"
+NFINAME_dm500hdv2 = "nfidump_mipsel_1.0.0"
+NFINAME_dm800sev2 = "nfidump_mipsel_1.0.0"
+NFINAME_dm500hd = "nfidump_mipsel_0.4.2"
+NFINAME_dm800se = "nfidump_mipsel_0.4.2"
+NFINAME_dm800 = "nfidump_mipsel_0.4.2"
+NFINAME_dm820 = "nfidump_mipsel_2.0.0"
+NFINAME_dm520 = "nfidump_mipsel_2.0.0"
+NFINAME_dm7080 = "nfidump_mipsel_2.0.0"
+
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep
-
-DEPENDS = "python lzo"
-
-RDEPENDS_${PN} = "kernel-module-nandsim openmultiboot enigma2 lzo"
-
-RDEPENDS_${PN}_gb800solo = "kernel-module-block2mtd openmultiboot"
-RDEPENDS_${PN}_spark7162 = "kernel-module-block2mtd openmultiboot unjffs2"
-RDEPENDS_${PN}_spark = "kernel-module-block2mtd openmultiboot unjffs2"
-
-EXTRA_OECONF = "\
-    --with-po \
-    BUILD_SYS=${BUILD_SYS} \
-    HOST_SYS=${HOST_SYS} \
-    STAGING_INCDIR=${STAGING_INCDIR} \
-    STAGING_LIBDIR=${STAGING_LIBDIR} \
-    --with-arch=${TARGET_ARCH} \
-    "
-
 do_install_append() {
-    # remove unused .pyc files
-    find ${D}${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/ -name '*.pyc' -exec rm {} \;
-
-    # remove .pyo files
-    find ${D}${libdir}/enigma2/python/Plugins/Extensions/${PLUGIN}/ -name '*.pyo' -exec rm {} \;
-    chmod 755 ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/open-multiboot-branding-helper.py
-    chmod 755 ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/open-multiboot-menu-helper.py
+    rm -rf ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/*.py
+    rm -rf ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/open-multiboot-branding-helper.pyo
+    cp ${S}/src/open-multiboot-branding-helper.py ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/open-multiboot-branding-helper.py
+    chmod 0755 ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/open-multiboot-branding-helper.py
+    chmod 0755 ${D}/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot/install-nandsim.sh
+    install -d ${D}/sbin
+    cp ${S}/src/open-multiboot-branding-helper.py ${D}/sbin
+    chmod 0755 ${D}/sbin/open-multiboot-branding-helper.py
+    install -d ${D}/usr/sbin
 }
 
-# skip this!
-install_egg_info() {
-}
-
-do_configure_prepend() {
-    touch ${S}/NEWS
-    touch ${S}/README
-    touch ${S}/AUTHORS
-    touch ${S}/ChangeLog
+do_install_append_mipsel() {
+    install -m 0755 ${WORKDIR}/${NFINAME} ${D}/usr/sbin/nfidump
 }
 
 pkg_preinst_${PN}() {
@@ -68,13 +67,22 @@ else
 fi
 }
 
-python populate_packages_prepend() {
-    enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends="enigma2")
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True)
-    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\/.*\.po$', 'enigma2-plugin-%s-po', '%s (translations)', recursive=True, match_path=True, prepend=True)
-}
+pkg_postrm_${PN}() {
+#!/bin/sh
 
-INSANE_SKIP_${PN} = "already-stripped"
+if mountpoint -q ${libdir}/enigma2/python/Plugins/Extensions/OpenMultiboot; then
+    echo "openMultiBoot will only remove on main image."
+    exit 0
+else
+    echo "Main image is running - proceeding removing..."
+fi
+
+rm -rf /sbin/init
+ln -s /sbin/init.sysvinit /sbin/init
+rm -rf /sbin/open-multiboot-branding-helper.py
+
+chown -Rh root:root ${libdir}/enigma2/python/Plugins/Extensions/OpenMultiboot
+rm -rf ${libdir}/enigma2/python/Plugins/Extensions/OpenMultiboot
+exit 0
+
+}

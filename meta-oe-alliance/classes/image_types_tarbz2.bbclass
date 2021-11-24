@@ -1,7 +1,8 @@
 inherit image_types
 
 IMAGEDIR = "${MACHINE}"
-IMAGEVERSION = "${IMAGE_NAME}"
+IMAGEVERSION = "${DISTRO_NAME}-${DISTRO_VERSION}-${MACHINE}-${MACHINESIMS}-${DATE}"
+IMAGEVERSION[vardepsexclude] += "DATE"
 
 IMAGE_CMD_tar = "tar --sort=name --numeric-owner -cf ${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.tar -C ${IMAGE_ROOTFS} . || [ $? -eq 1 ]"
 

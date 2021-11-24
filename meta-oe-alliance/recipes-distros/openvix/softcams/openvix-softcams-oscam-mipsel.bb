@@ -13,8 +13,6 @@ SRC_URI = "svn://svn.streamboard.tv/oscam;protocol=https;module=trunk;scmdata=ke
 
 PR = "r1"
 
-PACKAGES = "enigma2-plugin-softcams-oscam"
-
 PROVIDES += "openvix-softcams-oscam-mipsel"
 RPROVIDES_enigma2-plugin-softcams-oscam += "openvix-softcams-oscam-mipsel"
 

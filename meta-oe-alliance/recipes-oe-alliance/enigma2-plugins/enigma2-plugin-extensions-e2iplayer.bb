@@ -1,45 +1,61 @@
-SUMMARY = "E2iPlayer"
-DESCRIPTION = "Watch Videos Online"
-HOMEPAGE = "https://gitlab.com/iptvplayer-for-e2/"
+SUMMARY = "E2i Player for E2"
+DESCRIPTION = "E2i Player for E2"
+HOMEPAGE = "http://www.iptvplayer.gitlab.io/"
 SECTION = "multimedia"
-LICENSE = "GPLv2"
-require conf/license/license-gplv2.inc
+LICENSE = "GPLv3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
-SRC_URI = "git://gitlab.com/e2i/e2iplayer.git;protocol=http"
-SRC_URI_append += "file://ffmpeg4.patch"
+SRC_URI = " git://github.com/jack2015/e2iplayer-ov.git;protocol=${GIT_PROTOCOL} \
+	file://get-rid-of-boxinfo.patch \
+"
 
 S = "${WORKDIR}/git"
 
 inherit gitpkgv
 SRCREV = "${AUTOREV}"
-PV = "git${SRCPV}"
-PKGV = "git${GITPKGV}"
-PR = "r2"
+PV = "1+git${SRCPV}"
+PKGV = "1+git${GITPKGV}"
 
-inherit distutils-openplugins gettext
+inherit allarch distutils-openplugins gettext
 
 DEPENDS = "gettext-native python"
-RRECOMMENDS_${PN} = " \
-        enigma2-plugin-extensions-e2iplayer-deps \
-        python-compression \
-        python-core \
-        python-html \
-        python-e2icjson \
-        python-json \
-        python-shell \
-        python-subprocess \
-        python-textutils \
-        "
+
+RDEPENDS_${PN} = " \
+	cmdwrapper \
+	duktape \
+	exteplayer3 \
+	f4mdump \
+	ffmpeg \
+	gst-ifdsrc \
+	gstplayer \
+	hlsdl \
+	iptvsubparser \
+	lsdir \
+	python-core \
+	python-e2icjson \
+	python-pycurl \
+	rtmpdump \
+	uchardet \
+	wget \
+	"
 
 RDEPENDS_{PN}-src = "${PN}"
+
 FILES_${PN}-src = " \
-        ${libdir}/enigma2/python/Plugins/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*/*/*/*/*/*.py \
-        ${libdir}/enigma2/python/Plugins/*-py2.7.egg-info/* \
-        ${libdir}/enigma2/python/Plugins/*/locale/*/LC_MESSAGES/*.po \
-        "
+	${libdir}/enigma2/python/Plugins/*/*.py \
+	${libdir}/enigma2/python/Plugins/*/*/*.py \
+	${libdir}/enigma2/python/Plugins/*/*/*/*.py \
+	${libdir}/enigma2/python/Plugins/*/*/*/*/*.py \
+	${libdir}/enigma2/python/Plugins/*/*/*/*/*/*.py \
+	${libdir}/enigma2/python/Plugins/*-py2.7.egg-info/* \
+	${libdir}/enigma2/python/Plugins/*/locale/*/LC_MESSAGES/*.po \
+	"
 
 deltask package_qa
+
+FILES_${PN} += "${sysconfdir}"
+
+do_install_append() {
+    install -d ${D}${sysconfdir}
+    cp -r  --preserve=mode,links ${S}/vk ${D}${sysconfdir}/vk
+}
