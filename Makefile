@@ -27,7 +27,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-openembedded/meta-filesystems \
 	$(CURDIR)/meta-openembedded/meta-python \
 	$(CURDIR)/meta-openembedded/meta-webserver \
-	$(CURDIR)/meta-oe-alliance/meta-oe \
+	$(CURDIR)/meta-oe-alliance \
 	$(CURDIR)/meta-dream
 
 
