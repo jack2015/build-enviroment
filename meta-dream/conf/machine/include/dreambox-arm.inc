@@ -36,7 +36,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     dreambox-dvb-modules-${MACHINE} \
     "
 
-MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff blindscan-dvbs boxmodel"
+MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff blindscan-dvbs"
 # Add "dreambox" override for recipes
 MACHINEOVERRIDES .= ":dreambox"
 

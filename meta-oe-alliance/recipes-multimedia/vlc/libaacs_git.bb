@@ -9,7 +9,7 @@ PV = "0.11.0+git${SRCPV}"
 PKGV = "0.11.0+git${GITPKGV}"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://code.videolan.org/videolan/${BPN}.git;protocol=https"
+SRC_URI = "git://gitlab.com/jack2015/libaacs.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 

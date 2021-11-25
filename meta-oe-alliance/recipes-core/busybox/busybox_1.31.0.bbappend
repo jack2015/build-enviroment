@@ -1,22 +1,30 @@
 PR .= ".5"
 SRC_URI += " \
-            file://mount_single_uuid.patch \
-            file://use_ipv6_when_ipv4_unroutable.patch \
-            file://telnetd \
-            file://inetd \
-            file://inetd.conf \
-            file://vi.sh \
-            file://ntp.script \
-            file://0001-Prevent-telnet-connections-from-the-internet-to-the-.patch \
-            file://0002-Extended-network-interfaces-support.patch \
-            file://0003-Revert-ip-fix-ip-oneline-a.patch \
-            file://0004-libbb-make-unicode-printable.patch \
-            "
+	file://mount_single_uuid.patch \
+	file://use_ipv6_when_ipv4_unroutable.patch \
+	file://defconfig \
+	file://telnetd \
+	file://inetd \
+	file://inetd.conf \
+	file://vi.sh \
+	file://ntp.script \
+	file://mdev \
+	file://mdev.conf \
+	file://0001-Prevent-telnet-connections-from-the-internet-to-the-.patch \
+	file://0002-Extended-network-interfaces-support.patch \
+	file://0003-Revert-ip-fix-ip-oneline-a.patch \
+	file://0004-libbb-make-unicode-printable.patch \
+	"
 
 # we do not really depend on mtd-utils, but as mtd-utils replaces 
 # include/mtd/* we cannot build in parallel with mtd-utils
 DEPENDS += "mtd-utils"
 
+# Some packages recommend udev-hwdb to be installed. To prevent them actually
+# installing, just claim we already provide it and conflict with its default
+# provider.
+RPROVIDES_${PN}-mdev += "udev udev-hwdb"
+RCONFLICTS_${PN}-mdev += "eudev eudev-hwdb"
 INITSCRIPT_PARAMS_${PN}-mdev = "start 04 S ."
 
 RDEPENDS_${PN} += "odhcp6c"
@@ -51,7 +59,7 @@ do_install_append() {
 	install -m 0755 ${WORKDIR}/telnetd ${D}${sysconfdir}/init.d/telnetd.${BPN}
 	sed -i "s:/usr/sbin/:${sbindir}/:" ${D}${sysconfdir}/init.d/telnetd.${BPN}
     fi
-    rm -rf ${D}${sysconfdir}/mdev
+    rm -f ${D}${sysconfdir}/mdev/mdev-mount.sh
     install -m 0755 ${WORKDIR}/vi.sh ${D}${base_bindir}/vi.sh
     install -m 0755 ${WORKDIR}/ntp.script ${D}${sysconfdir}/udhcpc.d/55ntp
 }

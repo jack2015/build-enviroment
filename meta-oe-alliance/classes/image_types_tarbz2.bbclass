@@ -1,6 +1,5 @@
 inherit image_types
 
-IMAGEDIR = "${MACHINE}"
 IMAGEVERSION = "${DISTRO_NAME}-${DISTRO_VERSION}-${MACHINE}-${MACHINESIMS}-${DATE}"
 IMAGEVERSION[vardepsexclude] += "DATE"
 
