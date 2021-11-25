@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/glibc-2.30:"
 
 SRC_URI += " file://0001-ptrace-protect-ptrace_peeksiginfo_args-from-redefint.patch \
              file://0002-fix-build-for-old-libcheader.patch \

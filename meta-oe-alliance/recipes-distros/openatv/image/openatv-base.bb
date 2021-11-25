@@ -27,15 +27,10 @@ RDEPENDS_${PN} = "\
     python-service-identity \
     python-requests \
     rtmpdump \
+    tar \
     zip \
     ${@bb.utils.contains("TUNE_FEATURES", "armv", "glibc-compat", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv1", "", "ofgwrite", d)} \
-    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", " \
-        iproute2 \
-        tar \
-    ", d)} \
-    ${@bb.utils.contains_any("FLASHSIZE", "64 96", "", " \
-        ntfs-3g \
-        unrar \
-    ", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "iproute2", d)} \
+    ${@bb.utils.contains_any("FLASHSIZE", "64 96", "", "ntfs-3g unrar", d)} \
     "

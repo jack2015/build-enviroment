@@ -33,6 +33,8 @@ RRECOMMENDS_${PN} = " \
     enigma2-plugin-extensions-volume-adjust \
     enigma2-plugin-extensions-atilehd \
     enigma2-plugin-extensions-e2iplayer \
+    enigma2-plugin-extensions-youtube \
+    enigma2-plugin-systemplugins-serviceapp \
     enigma2-plugin-softcams-oscam \
     enigma2-plugin-extensions-openmultiboot \
     openmultiboot \
