@@ -1,7 +1,6 @@
 SUMMARY = "Oscam Softcam for ${MACHINE}"
 require conf/license/openpli-gplv2.inc
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-CAMNAME = "oscam"
 DEPENDS = "libusb openssl"
 
 PV = "11703"
@@ -18,8 +17,9 @@ S = "${WORKDIR}/git"
 B = "${S}"
 
 SRC_URI += " \
+    file://BhCamConf \
     file://oscam.conf \
-    file://softcam.${CAMNAME} \
+    file://Ncam_oscam.sh \
     "
 
 EXTRA_OECMAKE += "\
@@ -37,45 +37,25 @@ EXTRA_OECMAKE += "\
     "
 
 do_install() {
+    install -d ${D}${sysconfdir}
+    install -m 0644 ${WORKDIR}/BhCamConf ${D}${sysconfdir}
     install -d ${D}${sysconfdir}/tuxbox/config
     install -m 0644 ${WORKDIR}/oscam.conf ${D}${sysconfdir}/tuxbox/config
     install -d ${D}${bindir}
-    install -m 0755 ${B}/${CAMNAME} ${D}${bindir}
-    install -d ${D}/etc/init.d
-    install -m 0755 ${WORKDIR}/softcam.${CAMNAME} ${D}/etc/init.d/softcam.${CAMNAME}
+    install -m 0755 ${B}/oscam ${D}${bindir}
+    install -d ${D}/usr/camscript
+    install -m 0755 ${WORKDIR}/Ncam_oscam.sh ${D}/usr/camscript
 }
 
 do_install_append_dm800se() {
-    upx --best --ultra-brute ${D}/usr/bin/${CAMNAME}
+    upx --best --ultra-brute ${D}/usr/bin/oscam
 }
 
 do_install_append_dm500hd() {
-    upx --best --ultra-brute ${D}/usr/bin/${CAMNAME}
+    upx --best --ultra-brute ${D}/usr/bin/oscam
 }
 
 CONFFILES = "/etc/tuxbox/config/oscam.conf"
 FILES_${PN} = "/usr /etc"
 
-CAMPATH = "/etc/init.d/softcam.${CAMNAME}"
-CAMLINK = "/etc/init.d/softcam"
-# If no cam selected yet, install and start this cam (and don't start it on the build host).
-pkg_postinst_${PN}() {
-	if [ ! -e "$D${CAMLINK}" ] || [ "/etc/init.d/softcam.None" = "`readlink -f $D${CAMLINK}`" ] || [ "softcam.None" = "`readlink -f $D${CAMLINK}`" ]
-	then
-		ln -sf "softcam.${CAMNAME}" "$D${CAMLINK}"
-		$D${CAMPATH} restart > /dev/null 2>&1
-	else
-		$D${CAMLINK} stop > /dev/null 2>&1
-		ln -sf "softcam.${CAMNAME}" "$D${CAMLINK}"
-		$D${CAMPATH} restart > /dev/null 2>&1
-	fi
-}
 
-# Stop this cam (if running), and move softlink to None if we're the current cam
-pkg_prerm_${PN}_prepend() {
-	if  [ "/etc/init.d/softcam.${CAMNAME}" = "`readlink -f $D${CAMLINK}`" ] || [ "softcam.${CAMNAME}" = "`readlink -f $D${CAMLINK}`" ]
-	then
-		$D${CAMPATH} stop > /dev/null 2>&1
-		ln -sf "softcam.None" "$D${CAMLINK}"
-	fi
-}

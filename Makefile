@@ -112,7 +112,7 @@ $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'export MACHINESIMS=$(MACHINESIM)' >> $@
 	@echo 'export MACHINEBUILD=$(MACHINEBUILD)' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
-	@echo 'export BB_SRCREV_POLICY="cache"' >> $@
+#	@echo 'export BB_SRCREV_POLICY="cache"' >> $@
 
 
 $(DISTRO)_CONF_HASH := $(call hash, \
