@@ -5,9 +5,10 @@ clear
 BOX_1="dm900-original"
 BOX_2="dm900-clone"
 BOX_3="dm920-original"
+BOX_4="dm800se-original"
 
 list=
-for i in $(seq 1 3); do
+for i in $(seq 1 4); do
     p="BOX_$i"
     list="$list $i ${!p} "
 done
@@ -24,6 +25,10 @@ box=$(dialog --stdout --clear --colors --menu "Build Dreambox Image" 22 70 10 ${
     ;;
     3)
     machinespecific="dm920-original"
+    boxsim="original"
+    ;;
+    4)
+    machinespecific="dm800se-original"
     boxsim="original"
     ;;
     *) clear && exit ;;
@@ -65,6 +70,9 @@ elif [ "$machinespecific" = "dm900-original" ]; then
 elif [ "$machinespecific" = "dm920" ]; then
     echo "$echostr"
     MACHINE=dm920 DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
+elif [ "$machinespecific" = "dm800se-original" ]; then
+    echo "$echostr"
+    MACHINE=dm800se DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
 else
     echo "Please enter a correct choice"
 fi
