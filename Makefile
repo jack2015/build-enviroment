@@ -18,6 +18,8 @@ TMPDIR = $(TOPDIR)/tmp
 DEPDIR = $(TOPDIR)/.deps
 MACHINEBUILD = $(MACHINE)
 export MACHINEBUILD
+MACHINESIMS = $(MACHINESIM)
+export MACHINESIMS
 
 BBLAYERS ?= \
 	$(CURDIR)/openembedded-core/meta \
@@ -109,11 +111,9 @@ $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'export BB_ENV_EXTRAWHITE="MACHINE DISTRO MACHINEBUILD MACHINESIMS BB_SRCREV_POLICY BB_NO_NETWORK"' > $@
 	@echo 'export MACHINE=$(MACHINE)' >> $@
 	@echo 'export DISTRO=$(DISTRO)' >> $@
-	@echo 'export MACHINESIMS=$(MACHINESIM)' >> $@
 	@echo 'export MACHINEBUILD=$(MACHINEBUILD)' >> $@
+	@echo 'export MACHINESIMS' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
-#	@echo 'export BB_SRCREV_POLICY="cache"' >> $@
-
 
 $(DISTRO)_CONF_HASH := $(call hash, \
 	'$(DISTRO)_CONF_VERSION = "1"' \

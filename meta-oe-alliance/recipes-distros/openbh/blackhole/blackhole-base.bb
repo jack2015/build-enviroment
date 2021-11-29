@@ -27,14 +27,15 @@ do_install() {
 	install -d ${D}/etc
 	install -m 0644 ${WORKDIR}/bpmachine ${D}/etc/bpmachine
 	install -m 0644 ${WORKDIR}/bpversion ${D}/etc/bpversion
-	
 
+	install -d ${D}/etc/enigma2
+	echo "config.misc.ButtonSetup.red=Infobar/showExtensionSelection" > ${D}/etc/enigma2/settings
+	
 	install -d ${D}/usr/bin
 	for x in /StartBhCam; do
 		install -m 0755 ${WORKDIR}/$x ${D}/usr/bin/$x
 	done
 	
-
 	install -d ${D}/usr/camscript
 	install -m 0755 ${WORKDIR}/Ncam_Ci.sh ${D}/usr/camscript/Ncam_Ci.sh
 	
