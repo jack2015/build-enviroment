@@ -22,24 +22,21 @@ RDEPENDS_${PN} = "\
     enigma2 \
     tuxbox-links \
     tuxbox-common \
-    mtd-utils \
-    mtd-utils-ubifs \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "mtd-utils mtd-utils-ubifs", d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'emmc', 'bzip2 rsync', '', d)} \
     procps \
     parted \
     "
 
 RRECOMMENDS_${PN} = "\
-    ${@bb.utils.contains("DISTRO_FEATURES", "no-autobouquetsmaker", "" , "enigma2-plugin-systemplugins-autobouquetsmaker", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "" , "enigma2-plugin-systemplugins-autobouquetsmaker", d)} \
     enigma2-plugin-systemplugins-hotplug \
     enigma2-plugin-extensions-mediascanner \
     enigma2-plugin-extensions-pictureplayer \
     enigma2-plugin-extensions-openwebif \
     enigma2-plugin-systemplugins-networkbrowser \
     enigma2-plugin-systemplugins-networkwizard \
-    \
     ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "oe-alliance-drivers", d)} \
-    \
     enigma2-plugin-systemplugins-satfinder \
     ${@bb.utils.contains("MACHINE_FEATURES", "dvbc-only", "", "enigma2-plugin-systemplugins-positionersetup", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "blindscan-dvbs", "enigma2-plugin-systemplugins-blindscan" , "", d)} \
@@ -49,9 +46,7 @@ RRECOMMENDS_${PN} = "\
     ${@bb.utils.contains("MACHINE_FEATURES", "fastscan", "enigma2-plugin-systemplugins-fastscan" , "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "frontprocessor", "enigma2-plugin-systemplugins-frontprocessorupgrade" , "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "ci", "enigma2-plugin-systemplugins-commoninterfaceassignment", "", d)} \
-    ${@bb.utils.contains("MACHINE_FEATURES", "fanctrl", "enigma2-plugin-systemplugins-fancontrol", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "libpassthrough", "libpassthrough libdlsym", "", d)} \
-    ${@bb.utils.contains("MACHINE_FEATURES", "fan", "enigma2-plugin-systemplugins-tempfancontrol", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "transcoding", "enigma2-plugin-systemplugins-transcodingsetup", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "multitranscoding", "enigma2-plugin-systemplugins-multitranscodingsetup", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "inibt", "enigma2-plugin-extensions-btdevicesmanager" , "", d)} \

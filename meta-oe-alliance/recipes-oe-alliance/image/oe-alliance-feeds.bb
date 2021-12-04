@@ -14,9 +14,8 @@ PR = "r9"
 DEPENDS = ""
 
 RDEPENDS_${PN} = " \
-    autofs \
-    wireless-tools \
-"
+	autofs \
+	wireless-tools \
+	"
 
 GST_BASE_DVD = ""
-

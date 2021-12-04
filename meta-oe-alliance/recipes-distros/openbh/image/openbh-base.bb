@@ -17,25 +17,27 @@ inherit packagegroup
 DEPENDS = "openbh-version-info"
 
 RDEPENDS_${PN} = "\
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "\
+    curl \
+    hddtemp \
+    openvpn \
+    inadyn-mt \
+    rtmpdump \
+    dvbsnoop \
+    openssh-sftp-server \
+    mc \
+    ", d)} \
     blackhole-base \
     blackholesocker \
     ca-certificates \  
-    curl \  
-    dvbsnoop \
-    hddtemp \
-    inadyn-mt \
     libcrypto-compat-0.9.7 \
-    mc \
     ntfs-3g \
     oe-alliance-base \
     openbh-bootlogo \
     openbh-enigma2 \
     openbh-spinner \
     openbh-version-info \
-    openssh-sftp-server \
-    openvpn \
     python-imaging \
     python-service-identity \
-    rtmpdump \
     ${@bb.utils.contains("TUNE_FEATURES", "armv", "glibc-compat", "", d)} \
     "

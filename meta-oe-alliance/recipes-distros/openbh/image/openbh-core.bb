@@ -5,6 +5,7 @@ require conf/license/license-gplv2.inc
 
 DEPENDS = "enigma2 python-process libcrypto-compat-0.9.7 gettext-native"
 RDEPENDS_enigma2-plugin-obh-core = "ofgwrite python-process libcrypto-compat-0.9.7 python-compression zip procps python-beautifulsoup4"
+RDEPENDS_enigma2-plugin-obh-core_dm800se = ""
 
 RCONFLICTS_enigma2-plugin-obh-core = "settings-autorestore"
 RREPLACES_enigma2-plugin-obh-core = "settings-autorestore"
@@ -13,7 +14,6 @@ PROVIDES += "openbh-core"
 RPROVIDES_enigma2-plugin-obh-core += "openbh-core"
 
 inherit autotools-brokensep gitpkgv pythonnative
-# SRCREV = "${AUTOREV}"
 SRCREV = "e0c73d11dcdbfc3d4b7669081dad17db49ecb6e3"
 PV = "${IMAGE_VERSION}+git${SRCPV}"
 PKGV = "${IMAGE_VERSION}+git${GITPKGV}"

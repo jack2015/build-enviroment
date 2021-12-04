@@ -10,8 +10,6 @@ PRECOMPILED_ARCH_dm7020hdv2 = "dm7020hd"
 
 inherit kernel machine_kernel_pr
 
-MACHINE_KERNEL_PR_append = ".7"
-
 PATCHREV = "3c7230bc0819495db75407c365f4d1db70008044"
 PATCHLEVEL = "68"
 

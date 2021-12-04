@@ -17,6 +17,7 @@ VER ="3.0"
 PR = "r2"
 
 SRC_URI="git://github.com/jack2015/OBH-skins.git;protocol=https"
+SRC_URI_dm800se="git://github.com/jack2015/OBH-skins.git;protocol=https;branch=RC"
 
 S = "${WORKDIR}/git/BlackShadowSE_P"
 
@@ -24,5 +25,6 @@ FILES_${PN} = "/usr"
 
 do_install() {
     cp -rp ${S}/usr ${D}/
+    rm -rf ${D}/usr/share/fonts
     chmod -R a+rX ${D}/usr
 }

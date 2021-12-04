@@ -15,7 +15,10 @@ inherit packagegroup
 RCONFLICTS_${PN} = "enigma2-plugin-extensions-permanenttimeshift enigma2-plugin-systemplugins-skinselector"
 RREPLACES_${PN} = "enigma2-plugin-extensions-permanenttimeshift enigma2-plugin-systemplugins-skinselector"
 
-DEPENDS = "enigma2-pliplugins openbh-feeds"
+DEPENDS = " \
+    enigma2-pliplugins \
+    openbh-feeds \
+"
 
 RDEPENDS_${PN} = "\
     enigma2-skindefault \
@@ -23,27 +26,30 @@ RDEPENDS_${PN} = "\
     "
 
 RRECOMMENDS_${PN} = " \
-    enigma2-plugin-extensions-autotimer \
+    bitratecalc \
     enigma2-plugin-extensions-cutlisteditor \
     enigma2-plugin-extensions-epgimport \
-    enigma2-plugin-extensions-epgrefresh \
     enigma2-plugin-extensions-epgsearch \
-    enigma2-plugin-extensions-imdb \
     enigma2-plugin-extensions-mediaplayer \
     enigma2-plugin-extensions-socketmmi \
-    enigma2-plugin-systemplugins-crossepg \
     enigma2-plugin-systemplugins-hotplug \
+    enigma2-plugin-softcams-oscam \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "\
+    enigma2-plugin-extensions-cacheflush \
+    enigma2-plugin-extensions-fancontrol3 \
+    enigma2-plugin-extensions-backupsuite \
+    ", "\
     enigma2-plugin-extensions-e2iplayer \
     enigma2-plugin-extensions-youtube \
+    enigma2-plugin-extensions-imdb \
+    enigma2-plugin-extensions-autotimer \
+    enigma2-plugin-extensions-epgrefresh \
+    enigma2-plugin-systemplugins-crossepg \
     enigma2-plugin-systemplugins-serviceapp \
-    enigma2-plugin-softcams-oscam \
     enigma2-plugin-extensions-openmultiboot \
     openmultiboot \
-    bitratecalc \
+    ", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "videoenhancement", "", "enigma2-plugin-systemplugins-videoenhancement", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "uianimation", "enigma2-plugin-systemplugins-animationsetup" , "", d)} \
-    ${@bb.utils.contains("MACHINE_FEATURES", "omb", "enigma2-plugin-extensions-openmultiboot", "", d)} \
-    ${@bb.utils.contains("MACHINE_FEATURES", "omb", "openmultiboot", "", d)} \
     ${@bb.utils.contains("TARGET_ARCH", "arm", "glibc-compat", "", d)} \
     "
-

@@ -30,6 +30,15 @@ do_install() {
 
 	install -d ${D}/etc/enigma2
 	echo "config.misc.ButtonSetup.red=Infobar/showExtensionSelection" > ${D}/etc/enigma2/settings
+	echo "config.plugins.CacheFlush.enable=True" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.CacheFlush.scrinfo=False" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.Fan=4pin" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.maxRPM=3800" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.minRPM=1500" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.temp=35" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.tempmax=48" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.pwm=30" >> ${D}/etc/enigma2/settings
+	echo "config.plugins.FanControl.vlt=30" >> ${D}/etc/enigma2/settings
 	
 	install -d ${D}/usr/bin
 	for x in /StartBhCam; do

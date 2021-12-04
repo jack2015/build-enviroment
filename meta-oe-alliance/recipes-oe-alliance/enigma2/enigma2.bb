@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM_openatv = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 LIC_FILES_CHKSUM_beyonwiz = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 LIC_FILES_CHKSUM_openeight = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
+SRCREV = "${AUTOREV}"
+
 DEPENDS = " \
     freetype \
     gettext-native \
@@ -68,15 +70,16 @@ PYTHON_RDEPS = " \
     python-xml \
     python-zlib \
     python-zopeinterface \
-    python-email \
-    python-mime \
     python-pyusb \
     python-subprocess \
     python-process \
-    python-image \
-    python-imaging \
-    python-smtpd \
     python-six \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", " \
+    python-email \
+    python-mime \
+    python-image \
+    python-smtpd \
+    ", d)} \
     "
 
 GST_BASE_RDEPS = "\
@@ -109,7 +112,6 @@ GST_GOOD_RDEPS = "\
     gstreamer1.0-plugins-good-rtp \
     gstreamer1.0-plugins-good-rtpmanager \
     gstreamer1.0-plugins-good-rtsp \
-    gstreamer1.0-plugins-good-soup \
     gstreamer1.0-plugins-good-udp \
     gstreamer1.0-plugins-good-wavparse \
     gstreamer1.0-plugins-good-wavpack \
@@ -126,6 +128,7 @@ GST_BAD_RDEPS = "\
     gstreamer1.0-plugins-bad-hls \
     gstreamer1.0-plugins-bad-videoparsersbad \
     gstreamer1.0-plugins-bad-autoconvert \
+    gstreamer1.0-plugins-bad-neonhttpsrc \
 "
 
 GST_BAD_OPUS = " \
@@ -210,11 +213,10 @@ FILES_${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta"
 PACKAGE_ARCH = "${MACHINEBUILD}"
 
-PACKAGES =+ "enigma2-plugin-font-wqy-microhei enigma2-fonts"
-FILES_enigma2-plugin-font-wqy-microhei = "${datadir}/fonts/wqy-microhei.ttc ${datadir}/fonts/fallback.font"
+PACKAGES =+ "enigma2-plugin-fonts-wqy-microhei enigma2-fonts"
+FILES_enigma2-plugin-fonts-wqy-microhei = "${datadir}/fonts/wqy-microhei.ttc ${datadir}/fonts/fallback.font"
 FILES_enigma2-fonts = "${datadir}/fonts"
-
-ALLOW_EMPTY_enigma2-plugin-font-wqy-microhei = "1"
+ALLOW_EMPTY_enigma2-plugin-fonts-wqy-microhei = "1"
 
 EXTRA_OECONF = " \
     BUILD_SYS=${BUILD_SYS} \

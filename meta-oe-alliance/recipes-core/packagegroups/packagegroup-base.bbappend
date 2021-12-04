@@ -23,10 +23,19 @@ RDEPENDS_packagegroup-base-smbfs-server = "\
     samba \
     "
 
+RDEPENDS_packagegroup-base-smbfs-server_dm800se = "\
+    samba-base \
+    "
+
+RDEPENDS_packagegroup-base-smbfs-utils_dm800se = "\
+    samba \
+    "
+
 RDEPENDS_packagegroup-base-smbfs-utils = "\
     samba-admin \
     samba-utils \
     "
+
 
 RRECOMMENDS_packagegroup-base-samba = "\
     packagegroup-base-smbfs-client \

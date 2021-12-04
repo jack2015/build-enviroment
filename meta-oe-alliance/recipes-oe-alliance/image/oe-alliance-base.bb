@@ -35,32 +35,28 @@ RDEPENDS_${PN} = "\
     cronie \
     dropbear \
     early-configure \
-    e2fsprogs-mke2fs \
-    e2fsprogs-e2fsck \
-    e2fsprogs-tune2fs \
-    minilocale \
+    fakelocale \
     libavahi-client \
     libcrypto-compat-0.9.7 \
     libcrypto-compat-1.0.0 \
     libxcrypt-compat \
     llmnrd \
-    modutils-loadscript \
+    tzdata \
     ntpdate \
     opkg \
     rc-local \
     sdparm \
-    ${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv1", "", "p7zip", d)} \
+    vsftpd \
+    volatile-media \
     packagegroup-base \
     packagegroup-core-boot \
-    tzdata \
-    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "tzdata-europe", "tzdata-europe tzdata-australia tzdata-asia tzdata-pacific tzdata-africa tzdata-americas", d)} \
-    util-linux-sfdisk \
-    util-linux-blkid \
-    util-linux-flock \
-    volatile-media \
-    vsftpd \
-    wget \
-    python-twisted-protocols python-numbers python-argparse \
+    modutils-loadscript \
+    e2fsprogs-tune2fs \
+    e2fsprogs-e2fsck \
+    e2fsprogs-mke2fs \
+    ${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv1", "", "p7zip", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "python-twisted-protocols python-numbers python-argparse", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "wget util-linux-sfdisk util-linux-blkid util-linux-flock", d)} \
     "
 
 # The following RRECOMMENDS ensure that images on boxes with very limited
@@ -68,6 +64,7 @@ RDEPENDS_${PN} = "\
 # by including the corresponding kernel modules.
 # So far these are xfs and vfat and their dependencies
 RRECOMMENDS_${PN} = "\
+    ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", " \
     kernel-module-xfs \
     kernel-module-exportfs \
     kernel-module-fat \
@@ -76,6 +73,7 @@ RRECOMMENDS_${PN} = "\
     kernel-module-nls-cp437 \
     kernel-module-nls-iso8859-1 \
     kernel-module-nls-iso8859-15 \
+    ", d)} \
     "
 
 GETEXTRA = "${@bb.utils.contains('MACHINE', 'cube', '', 'edid-decode', d)}"

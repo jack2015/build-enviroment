@@ -1,4 +1,4 @@
-SUMMARY = "OpenBH Extras"
+SUMMARY = "OpenBH Feed"
 MAINTAINER = "OpenBH"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302 \
@@ -13,4 +13,19 @@ PR = "r5"
 
 inherit packagegroup
 
-RRECOMMENDS_${PN} = ""
+RRECOMMENDS_${PN} = " \
+	${@bb.utils.contains("TARGET_ARCH", "mipsel", " \
+	enigma2-plugin-softcams-cccam-v209 \
+	enigma2-plugin-softcams-cccam-v221 \
+	enigma2-plugin-softcams-cccam-v230 \
+	enigma2-plugin-softcams-cccam-v232 \
+	enigma2-plugin-softcams-cccam-v238 \
+	enigma2-plugin-softcams-mgcamd-v135a \
+	enigma2-plugin-softcams-mgcamd-v145c \
+	", "", d)} \
+	${@bb.utils.contains("TARGET_ARCH", "arm", " \
+	enigma2-plugin-softcams-cccam-v232-arm \
+	enigma2-plugin-softcams-cccam-v238-arm \
+	enigma2-plugin-softcams-mgcamd-v135a-arm \
+	", "", d)} \
+"

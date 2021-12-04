@@ -20,17 +20,20 @@ require conf/machine/box-hardware.inc
 
 MACHINE_EXTRA_RRECOMMENDS += " \
     gstreamer1.0-plugin-dvbmediasink \
-    gstreamer1.0-libav \
     kernel-module-cifs \
-    kernel-module-autofs4 \
     kernel-module-hmac \
     kernel-module-md4 \
     kernel-module-ecb \
+    dreambox-boot-progress \
+    ${@bb.utils.contains_any('MACHINE', 'dm500hd dm800se', '', 'gstreamer1.0-libav', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'smallflash', '', ' \
+    kernel-module-autofs4 \
     kernel-module-fuse \
     kernel-module-nfsd \
     kernel-module-exportfs \
     kernel-module-snd-oss \
     kernel-module-snd-pcm-oss \
+    ',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'v3d', 'libvc5dream', '',d)} \
     "
     
@@ -45,7 +48,7 @@ PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${MACHINE}"
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
 PREFERRED_PROVIDER_virtual/blindscan-dvbc = "dreambox-blindscan-utils"
 
-PREFERRED_VERSION_linux-dreambox ?= "3.2"
+PREFERRED_VERSION_linux-dreambox = "3.2"
 
 PREFERRED_VERSION_rt8812au = "4.3.14"
 

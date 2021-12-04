@@ -3,7 +3,7 @@ require conf/license/openpli-gplv2.inc
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "libusb openssl"
 
-PV = "11703"
+PV = "11704"
 PR = "r798"
 
 INHIBIT_PACKAGE_STRIP = "1"
