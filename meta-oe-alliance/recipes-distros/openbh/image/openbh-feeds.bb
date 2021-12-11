@@ -14,18 +14,19 @@ PR = "r5"
 inherit packagegroup
 
 RRECOMMENDS_${PN} = " \
+	enigma2-plugin-extensions-wqy-font \
 	${@bb.utils.contains("TARGET_ARCH", "mipsel", " \
-	enigma2-plugin-softcams-cccam-v209 \
-	enigma2-plugin-softcams-cccam-v221 \
-	enigma2-plugin-softcams-cccam-v230 \
-	enigma2-plugin-softcams-cccam-v232 \
-	enigma2-plugin-softcams-cccam-v238 \
-	enigma2-plugin-softcams-mgcamd-v135a \
-	enigma2-plugin-softcams-mgcamd-v145c \
+	enigma2-plugin-extensions-cccam-v209 \
+	enigma2-plugin-extensions-cccam-v221 \
+	enigma2-plugin-extensions-cccam-v230 \
+	enigma2-plugin-extensions-cccam-v232 \
+	enigma2-plugin-extensions-cccam-v238 \
+	enigma2-plugin-extensions-mgcamd-v135a \
+	enigma2-plugin-extensions-mgcamd-v145c \
 	", "", d)} \
 	${@bb.utils.contains("TARGET_ARCH", "arm", " \
-	enigma2-plugin-softcams-cccam-v232-arm \
-	enigma2-plugin-softcams-cccam-v238-arm \
-	enigma2-plugin-softcams-mgcamd-v135a-arm \
+	enigma2-plugin-extensions-cccam-v232-arm \
+	enigma2-plugin-extensions-cccam-v238-arm \
+	enigma2-plugin-extensions-mgcamd-v135a-arm \
 	", "", d)} \
 "

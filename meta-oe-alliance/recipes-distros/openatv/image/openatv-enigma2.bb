@@ -35,7 +35,7 @@ RRECOMMENDS_${PN} = " \
     enigma2-plugin-extensions-e2iplayer \
     enigma2-plugin-extensions-youtube \
     enigma2-plugin-systemplugins-serviceapp \
-    enigma2-plugin-softcams-oscam \
+    enigma2-plugin-extensions-oscam-openatv \
     enigma2-plugin-extensions-openmultiboot \
     openmultiboot \
     enigma2-plugin-systemplugins-videotune \

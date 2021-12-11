@@ -1,8 +1,9 @@
 SUMMARY = "Temperature dependent fan control"
 MAINTAINER = "Dreambox Developers"
 require conf/license/license-gplv2.inc
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit gitpkgv allarch
+inherit gitpkgv
 
 SRCREV = "${AUTOREV}"
 PV = "2.9+git${SRCPV}"

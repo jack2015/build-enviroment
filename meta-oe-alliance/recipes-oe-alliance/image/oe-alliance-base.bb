@@ -35,7 +35,7 @@ RDEPENDS_${PN} = "\
     cronie \
     dropbear \
     early-configure \
-    fakelocale \
+    ${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "fakelocale", "minilocale", d)} \
     libavahi-client \
     libcrypto-compat-0.9.7 \
     libcrypto-compat-1.0.0 \

@@ -1,6 +1,14 @@
 #!/bin/sh
 
-clear
+python --version 2>> /tmp/python-version
+python --version > /tmp/python-version
+if grep -qs -i 'Python 3' cat /tmp/python-version ; then
+    echo -e "${RED}Python version is wrong!"
+    echo -e "It means you need to choose Python2!"
+    sudo update-alternatives --config python
+    exit 0
+fi
+
 ## Menu Select Boxes ##
 BOX_1="dm900-original"
 BOX_2="dm900-clone"

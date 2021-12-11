@@ -24,6 +24,8 @@ rmpo() {
 			echo "do nothing"
 		elif [ $file2 = "el" ]; then
 			echo "do nothing"
+		elif [ $file2 = "zh_CN" ]; then
+			echo "do nothing"
 		else
 			rm -rf $1/$file2
 		fi
@@ -41,7 +43,9 @@ upxall() {
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/bin/mpg123 || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/bin/openssl || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/bin/sdparm || true
+	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/bin/smbclient || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/alsactl || true
+	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/automount || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/avahi-daemon || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/dropbearmulti || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/ethtool || true
@@ -50,6 +54,7 @@ upxall() {
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/groupdel || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/groupmod || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/newusers || true
+	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/ntpdate || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/parted || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/rpc.mountd || true
 	upx --best --ultra-brute ${IMAGE_ROOTFS}/usr/sbin/rpc.statd || true
@@ -64,6 +69,8 @@ upxall() {
 
 remove_unused_file() {
     echo "src/gz openbh-dm800se https://jack2015.github.io/openbh-feed/dm800se" > ${IMAGE_ROOTFS}/etc/opkg/dm800se-feed.conf
+    echo "src/gz openbh-mips32el https://jack2015.github.io/openbh-feed/mips32el" > ${IMAGE_ROOTFS}/etc/opkg/mips32el-feed.conf
+    echo "src/gz openbh-all https://jack2015.github.io/openbh-feed/all" > ${IMAGE_ROOTFS}/etc/opkg/all-feed.conf
     rm -rf ${IMAGE_ROOTFS}/var/lib/opkg/lists
     rm -rf ${IMAGE_ROOTFS}/usr/lib/python2.7/site-packages/*egg-info*
     rm -rf ${IMAGE_ROOTFS}/usr/share/mime/*

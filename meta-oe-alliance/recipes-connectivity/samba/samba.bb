@@ -37,6 +37,7 @@ PACKAGECONFIG[winbind] = "--with-winbind,--without-winbind,"
 PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind"
 PACKAGECONFIG[libunwind] = ", , libunwind"
 PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
+PACKAGECONFIG[netbios] = " "
 
 SAMBA4_AUTH_MODULES=""
 SAMBA4_IDMAP_MODULES=""

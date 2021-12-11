@@ -213,10 +213,10 @@ FILES_${PN}-meta = "${datadir}/meta"
 PACKAGES += "${PN}-meta"
 PACKAGE_ARCH = "${MACHINEBUILD}"
 
-PACKAGES =+ "enigma2-plugin-fonts-wqy-microhei enigma2-fonts"
-FILES_enigma2-plugin-fonts-wqy-microhei = "${datadir}/fonts/wqy-microhei.ttc ${datadir}/fonts/fallback.font"
+PACKAGES =+ "enigma2-plugin-font-wqy-microhei enigma2-fonts"
+FILES_enigma2-plugin-font-wqy-microhei = "${datadir}/fonts/wqy-microhei.ttc ${datadir}/fonts/fallback.font"
 FILES_enigma2-fonts = "${datadir}/fonts"
-ALLOW_EMPTY_enigma2-plugin-fonts-wqy-microhei = "1"
+ALLOW_EMPTY_enigma2-plugin-font-wqy-microhei = "1"
 
 EXTRA_OECONF = " \
     BUILD_SYS=${BUILD_SYS} \
