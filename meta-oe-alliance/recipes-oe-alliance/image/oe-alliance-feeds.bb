@@ -14,7 +14,6 @@ PR = "r9"
 DEPENDS = ""
 
 RDEPENDS_${PN} = " \
-    autofs \
     wireless-tools \
     zeroconf \
     "

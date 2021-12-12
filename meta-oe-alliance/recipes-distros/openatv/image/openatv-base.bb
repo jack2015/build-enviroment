@@ -13,7 +13,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 RDEPENDS_${PN} = "\
-    autofs \
     wireless-tools \
     ca-certificates \
     flip \
@@ -29,6 +28,7 @@ RDEPENDS_${PN} = "\
     rtmpdump \
     tar \
     zip \
+    ${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "", "autofs", d)} \
     ${@bb.utils.contains("TUNE_FEATURES", "armv", "glibc-compat", "", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "dreamboxv1", "", "ofgwrite", d)} \
     ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", "iproute2", d)} \

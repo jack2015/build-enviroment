@@ -36,7 +36,7 @@ RRECOMMENDS_${PN} = " \
     enigma2-plugin-softcams-oscam \
     ${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "\
     enigma2-plugin-extensions-cacheflush \
-    enigma2-plugin-extensions-fancontrol3 \
+    enigma2-plugin-extensions-fancontrol2 \
     enigma2-plugin-extensions-backupsuite \
     ", "\
     enigma2-plugin-extensions-e2iplayer \

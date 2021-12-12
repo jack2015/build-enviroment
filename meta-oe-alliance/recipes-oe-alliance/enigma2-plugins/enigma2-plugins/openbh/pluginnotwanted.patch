@@ -1,8 +1,8 @@
 diff --git a/Makefile.am b/Makefile.am
-index 09343ff1..b3a2916a 100644
+index 09343ff..d142bde 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -1,110 +1,59 @@
+@@ -1,110 +1,61 @@
  ACLOCAL_AMFLAGS = -I m4
  
  SUBDIRS = \
@@ -100,18 +100,32 @@ index 09343ff1..b3a2916a 100644
 -	werbezapper \
 -	zaphistorybrowser \
  	zapstatistic \
--	zdfmediathek \
+ 	zdfmediathek \
 -	esame \
 -	schiffe \
 -	sudoku \
 -	vierg \
 -	bmediacenter \
 -	advancedmovieselection
-+	zdfmediathek
++	networkbrowserpli \
++	epgsearch 
  
  if DREAMBOX
 -SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
-+SUBDIRS +=  fancontrol2 logomanager genuinedreambox
++SUBDIRS +=  logomanager genuinedreambox
  endif
  
  if VUSOLO2
+@@ -134,12 +85,6 @@ SUBDIRS += \
+ 	pluginsort 
+ endif
+ 
+-if PLI
+-SUBDIRS += networkbrowserpli epgsearchpli
+-else
+-SUBDIRS += networkbrowser epgsearch
+-endif
+-
+ metadir = $(datadir)/meta
+ meta_DATA = index-enigma2-plugins.xml
+ CLEANFILES = index-enigma2-plugins.xml

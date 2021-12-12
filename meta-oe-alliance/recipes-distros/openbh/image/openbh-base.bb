@@ -29,8 +29,7 @@ RDEPENDS_${PN} = "\
     ", d)} \
     blackhole-base \
     blackholesocker \
-    ca-certificates \  
-    libcrypto-compat-0.9.7 \
+    ca-certificates \
     ntfs-3g \
     oe-alliance-base \
     openbh-bootlogo \
