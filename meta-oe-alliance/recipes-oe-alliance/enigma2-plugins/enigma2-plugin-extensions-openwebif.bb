@@ -1,13 +1,12 @@
-MODULE = "OpenWebif"
-DESCRIPTION = "Control your receiver with a browser"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=26abba37d1c2fcbf96a087ceb8e1db86"
+SUMMARY = "Control your receiver with a browser"
+# LICENSE = "GPLv2"
+# LIC_FILES_CHKSUM = "file://README;firstline=10;lastline=12;md5=26abba37d1c2fcbf96a087ceb8e1db86"
+require conf/license/license-gplv2.inc
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-BRANCH="master"
-
 DEPENDS = "python-cheetah-native"
+
 RDEPENDS_${PN} = "\
 	aio-grab \
 	python-cheetah \
@@ -28,10 +27,14 @@ inherit gitpkgv distutils-openplugins gettext
 DISTUTILS_INSTALL_ARGS = "--root=${D} --install-lib=${libdir}/enigma2/python/Plugins"
 
 SRCREV = "${AUTOREV}"
-PV = "1.4.6+git${SRCPV}"
-PKGV = "1.4.6+git${GITPKGV}"
+PV = "git${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 
-SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-${MODULE}.git;protocol=https;branch=${BRANCH} \
+SRCREV_dm800se = "502a24d9e8c5e8a3fa324aff633332e29929e20b"
+PV_dm800se = "1.3.9+git${SRCPV}"
+PKGV_dm800se = "1.3.9+git${GITPKGV}"
+
+SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git;protocol=https;branch=master \
            file://transcoding.py"
 
 S="${WORKDIR}/git"
@@ -47,7 +50,7 @@ do_compile() {
 	python -O -m compileall ${S}
 }
 
-PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/${MODULE}"
+PLUGINPATH = "${libdir}/enigma2/python/Plugins/Extensions/OpenWebif"
 do_install_append() {
 	install -d ${D}${PLUGINPATH}
 	cp -r ${S}/plugin/* ${D}${PLUGINPATH}
