@@ -38,5 +38,6 @@ RDEPENDS_${PN} = "\
     openbh-version-info \
     python-imaging \
     python-service-identity \
+    ${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "", "autofs smbclient", d)} \
     ${@bb.utils.contains("TUNE_FEATURES", "armv", "glibc-compat", "", d)} \
     "

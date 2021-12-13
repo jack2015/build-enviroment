@@ -123,3 +123,36 @@ index 0a6da8a..d80a709 100644
  Description: Networkbrowser and Network-Mountmanager
 -Depends: enigma2, autofs, smbclient
 +Depends: enigma2
+diff --git a/networkbrowser/src/MountEdit.py b/networkbrowser/src/MountEdit.py
+index ea0cad1..65d3836 100644
+--- a/networkbrowser/src/MountEdit.py
++++ b/networkbrowser/src/MountEdit.py
+@@ -17,7 +17,8 @@ from enigma import ePoint
+ from .AutoMount import iAutoMount, AutoMount
+ from re import sub as re_sub
+ 
+-from boxbranding import getImageDistro
++from boxbranding import getImageDistro, getBoxType
++from os import path
+ 
+ 
+ class AutoMountEdit(Screen, ConfigListScreen):
+@@ -123,7 +124,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
+ 		self.hdd_replacementEntry = None
+ 
+ 		self.mountusing = []
+-		self.mountusing.append(("autofs", _("AUTOFS (mount as needed)")))
++		if path.exists("/usr/lib/autofs"):
++			self.mountusing.append(("autofs", _("AUTOFS (mount as needed)")))
+ 		self.mountusing.append(("fstab", _("FSTAB (mount at boot)")))
+ 		self.mountusing.append(("enigma2", _("Enigma2 (mount using enigma2)")))
+ 		self.mountusing.append(("old_enigma2", _("Enigma2 old format (mount using linux)")))
+@@ -133,7 +135,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
+ 		self.sharetypelist.append(("nfs", _("NFS share")))
+ 
+ 		mountusing_default = "fstab"
+-		if getImageDistro() in ("openvix", "easy-gui-aus", "beyonwiz", "openatv", "openhdf"):
++		if (getImageDistro() in ("openvix", "easy-gui-aus", "beyonwiz", "openatv", "openhdf")) and (getBoxType() not in ("dm800se", "dm500hd")):
+ 			mountusing_default = "autofs"
+ 
+ 		if 'mountusing' in self.mountinfo:
