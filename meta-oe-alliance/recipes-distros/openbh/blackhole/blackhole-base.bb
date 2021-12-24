@@ -44,10 +44,10 @@ do_install() {
 		install -m 0755 ${WORKDIR}/$x ${D}/usr/script/$x
 	done
 	
-	install -d ${D}/etc/openvpn
-	for x in /openvpn.log; do
-		install -m 0644 ${WORKDIR}/$x ${D}/etc/openvpn/$x
-	done
+#	install -d ${D}/etc/openvpn
+#	for x in /openvpn.log; do
+#		install -m 0644 ${WORKDIR}/$x ${D}/etc/openvpn/$x
+#	done
 	
 	install -d ${D}/etc/init.d
 	install -m 0755 ${WORKDIR}/bp_swap ${D}/etc/init.d/bp_swap
@@ -56,8 +56,8 @@ do_install() {
 #	ln -sf /etc/init.d/openvpn ${D}/etc/rc3.d/S20openvpn
 	ln -sf /etc/init.d/bp_swap ${D}/etc/rc3.d/S40bp_swap
 
-	install -d ${D}/etc/rc4.d
-	ln -s /etc/init.d/openvpn ${D}/etc/rc4.d/S20openvpn
+#	install -d ${D}/etc/rc4.d
+#	ln -s /etc/init.d/openvpn ${D}/etc/rc4.d/S20openvpn
 
 }
 
