@@ -30,11 +30,13 @@ SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV_dm800se = "502a24d9e8c5e8a3fa324aff633332e29929e20b"
 PV_dm800se = "1.3.9+git${SRCPV}"
 PKGV_dm800se = "1.3.9+git${GITPKGV}"
 
 SRC_URI = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git;protocol=https;branch=master \
+           file://transcoding.py"
+
+SRC_URI_dm800se = "git://github.com/E2OpenPlugins/e2openplugin-OpenWebif.git;protocol=https;branch=NoSix \
            file://transcoding.py"
 
 S="${WORKDIR}/git"

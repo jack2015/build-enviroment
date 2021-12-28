@@ -1,4 +1,4 @@
-
+#
 PACKAGECONFIG ??= ""
 
 SRC_URI += "file://sanity-check-provides.patch \
