@@ -14,6 +14,7 @@ PR = "r9"
 DEPENDS = ""
 
 RDEPENDS_${PN} = " \
+    enigma2-plugin-extensions-e2piconizer \
     wireless-tools \
     zeroconf \
     "

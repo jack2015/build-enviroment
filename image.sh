@@ -73,21 +73,26 @@ build=$(dialog --stdout --clear --colors --menu "Select build type" 12 60 10 ${l
 clear
 
 if [ "$machinespecific" = "dm900-clone" ]; then
+    rm -f builds/${MAKETYPE}/release/dm900/bitbake.lock
     cp -f backup/dm900-clone/* meta-dream/recipes-local/drivers/
     echo "$echostr"
     MACHINE=dm900 DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
 elif [ "$machinespecific" = "dm900-original" ]; then
+    rm -f builds/${MAKETYPE}/release/dm900/bitbake.lock
     cp -f backup/dm900-original/* meta-dream/recipes-local/drivers/
     echo "$echostr"
     MACHINE=dm900 DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
 elif [ "$machinespecific" = "dm920" ]; then
+    rm -f builds/${MAKETYPE}/release/dm920/bitbake.lock
     echo "$echostr"
     MACHINE=dm920 DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
 elif [ "$machinespecific" = "dm800se-original" ]; then
+    rm -f builds/${MAKETYPE}/release/dm800se/bitbake.lock
     echo "$echostr"
     cp -f backup/dm800se/original/* meta-dream/recipes-local/drivers/
     MACHINE=dm800se DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
 elif [ "$machinespecific" = "dm800se-clone" ]; then
+    rm -f builds/${MAKETYPE}/release/dm800se/bitbake.lock
     echo "$echostr"
     cp -f backup/dm800se/clone/* meta-dream/recipes-local/drivers/
     MACHINE=dm800se DISTRO=${MAKETYPE} DISTRO_TYPE=release MACHINESIM=${boxsim} make image
