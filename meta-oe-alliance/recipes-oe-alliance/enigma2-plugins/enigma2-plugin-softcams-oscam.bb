@@ -3,6 +3,7 @@ require conf/license/openpli-gplv2.inc
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "libusb openssl"
 
+SRCREV = "${AUTOREV}"
 PV = "11704"
 PR = "r798"
 
@@ -11,8 +12,8 @@ INSANE_SKIP_${PN} += "already-stripped"
 
 inherit cmake gitpkgv
 
-SRC_URI = "git://github.com/jack2015/oscam-patched.git;protocol=${GIT_PROTOCOL};branch=master"
-SRCREV = "${AUTOREV}"
+SRC_URI = "git://github.com/jack2015/oscam-patched.git;protocol=https;branch=master"
+
 S = "${WORKDIR}/git"
 B = "${S}"
 
