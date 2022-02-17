@@ -11,6 +11,8 @@ IMAGE_CMD_tar_prepend = " \
 
 CONVERSION_CMD_bz2 = " \
     rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
+    rm -f ${DEPLOY_DIR_IMAGE}/*.json; \
+    rm -f ${DEPLOY_DIR_IMAGE}/*.tar.bz2; \
     bzip2 -f -k ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.tar; \
     mkdir -p ${IMAGEDIR}; \
     cp ${DEPLOY_DIR_IMAGE}/zImage ${IMAGEDIR}/${KERNEL_FILE}; \
